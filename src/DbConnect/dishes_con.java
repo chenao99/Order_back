@@ -83,7 +83,7 @@ public class dishes_con extends DBcon {
     	    ps.setLong(7, dishes.getkind());
     	    ps.execute();
             return 1;    //插入成功
-        }	
+        }
 	}
 	
 	
@@ -146,6 +146,43 @@ public class dishes_con extends DBcon {
 	    return allmenu;
 	}
 	
+	public int changedishesnum(ALLMenu allmenu) throws SQLException{
+		ArrayList<Menu> menulist=allmenu.results;
+		for(int i=0;i<menulist.size();i++) {
+			ArrayList<Dishes> disheslist=menulist.get(i).dishes;
+			for(int j=0;j<disheslist.size();j++) {
+				String sql="UPDATE dishes set sum=? WHERE id=?";
+				ps = dbConn.prepareStatement(sql);
+				ps.setLong(1,disheslist.get(j).getsum() );
+	    	    ps.setString(2,disheslist.get(j).getid() );
+	    	    ps.executeUpdate();
+			}
+		}
+		return 1;
+	}
+	
+	//添加新菜系
+	public int addkind(int id,String name) throws SQLException
+	{
+		String sqlask="SELECT * FROM  kind WHERE id=?";
+		ps = dbConn.prepareStatement(sqlask);
+	    ps.setLong(1, id);
+	    rs = ps.executeQuery();
+	    if(rs.next()) {
+	    	return 1;    //插入失败
+	    }
+	    else {
+	    	String sql="insert into kind(id,name) value(?,?)";
+			ps = dbConn.prepareStatement(sql);
+		    ps.setLong(1, id);
+		    ps.setString(2, name);
+		    ps.execute();
+		    return 0;
+	    }
+		
+		
+
+	}
 	
 	
 	

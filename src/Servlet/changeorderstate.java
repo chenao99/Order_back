@@ -41,10 +41,10 @@ public class changeorderstate extends HttpServlet {
 		try {
 			if(con.changeorderstate(id,state))
 			{
-	    		jsonStr = "{\"info\":\"³É¹¦\"}";
+	    		jsonStr = "{\"info\":\"1\"}";
 			}
 			else {
-				jsonStr = "{\"info\":\"Ê§°Ü\"}";
+				jsonStr = "{\"info\":\"0\"}";
 			}
     		System.out.println(jsonStr);
     		PrintWriter out = null;

@@ -52,11 +52,19 @@ public class order {
 		this.evaluate=evaluate;
 	}
 	
-	public order(String order_id,double priceall,int dishes_num,int table,String overdate) {
+	public order(String order_id,double priceall,int table,String overdate) {
 		this.order_id=order_id;
 		this.priceall=priceall;
 		this.table_id=table;
 		this.overdate=overdate;
+	}
+	
+	public order(String cus_id,String order_id,double priceall,int table,String state) {
+		this.cus_id=cus_id;
+		this.order_id=order_id;
+		this.priceall=priceall;
+		this.table_id=table;
+		this.state=state;
 	}
 
 }

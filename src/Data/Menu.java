@@ -9,7 +9,7 @@ public class Menu {
 	
 	private int _id;
 	private String title;
-	public List<Dishes> dishes=new ArrayList<Dishes>();
+	public ArrayList<Dishes> dishes=new ArrayList<Dishes>();
 	
 	public int getid() {
 		return this._id;

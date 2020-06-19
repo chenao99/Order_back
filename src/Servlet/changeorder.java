@@ -32,9 +32,11 @@ public class changeorder extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		request.setCharacterEncoding("utf-8");
-		String order_id=request.getParameter("order_id");     //订单id
+		String table_id=request.getParameter("table_id");     //订单id
+		double priceall=Double.valueOf(request.getParameter("priceall")).doubleValue();     //新增总价
 		String[] dishes=request.getParameter("dishes").split(",");  //菜名列表
         String[] numstr=request.getParameter("num").split(",");     //菜数量列表
+        System.out.println(priceall);
         int[] num=new int[numstr.length];
         for(int i=0;i<numstr.length;i++) {
         	num[i]=Integer.valueOf(numstr[i]).intValue();
@@ -43,8 +45,8 @@ public class changeorder extends HttpServlet {
 		response.setCharacterEncoding("UTF-8");
 		response.setContentType("application/json; charset=utf-8");
 		try {
-			con.changeorder(order_id, dishes, num);
-			String jsonStr = "{\"info\":\"成功\"}";
+			con.changeorder(table_id,priceall, dishes, num);
+			String jsonStr = "{\"info\":\"1\"}";
 			System.out.println(jsonStr);
     		PrintWriter out = null;
     		try {

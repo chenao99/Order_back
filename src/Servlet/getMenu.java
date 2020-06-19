@@ -45,6 +45,7 @@ public class getMenu extends HttpServlet {
 			String json=gson.toJson(customer);
 			System.out.println(json);
 			PrintWriter out = null;
+			
 			out = response.getWriter();
 		    out.write(json);
 		    out.flush();

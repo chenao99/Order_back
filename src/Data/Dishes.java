@@ -36,6 +36,10 @@ public class Dishes {
 		return this.url;
 	}
 	
+	public void setsum(int sum) {
+		this.salesCount=sum;
+	}
+	
 	public Dishes(String id,String name,double price,String note,String evaluate,int kind,int sum,String url) {
 		// TODO 自动生成的构造函数存根
 		this.ID=id;

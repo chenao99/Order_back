@@ -13,6 +13,9 @@ public class ALLMenu {
 		return this.error;
 	}
 	
+	public void seterror(String error) {
+		this.error=error;
+	}
 	public ArrayList<Menu> getresult() {
 		return this.results;
 	}

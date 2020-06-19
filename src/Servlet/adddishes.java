@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
 
+import Data.ALLMenu;
 import Data.Dishes;
 import DbConnect.dishes_con;
 
@@ -36,13 +37,14 @@ public class adddishes extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		request.setCharacterEncoding("utf-8");
-		String id=request.getParameter("id");
-        String name =request.getParameter("name");
-        double price =Double.valueOf(request.getParameter("price")).doubleValue();
+		String id=request.getParameter("newid");
+        String name =request.getParameter("newname");
+        double price =Double.valueOf(request.getParameter("newprice")).doubleValue();
+        int kinds=Integer.valueOf(request.getParameter("newdishes_kindid")).intValue();
+        int sum=Integer.valueOf(request.getParameter("newnum")).intValue();
+        
         String note =request.getParameter("note");
         String evaluate=request.getParameter("evaluate");
-        int kinds=Integer.valueOf(request.getParameter("kind")).intValue();
-        int sum=Integer.valueOf(request.getParameter("sum")).intValue();
         String url=request.getParameter("url");
         Dishes dishes=new Dishes(id,name,price,note,evaluate,kinds,sum,url);
 		dishes_con con=new dishes_con();
@@ -50,13 +52,23 @@ public class adddishes extends HttpServlet {
 		response.setContentType("application/json; charset=utf-8");
 		String jsonStr="";
 		try {
-			if(con.addDisher(dishes)==0)
+			ALLMenu customer=con.getMenu();
+			if(con.addDisher(dishes)==1)
 			{
-	    		jsonStr = "{\"info\":\"0\"}";
+				customer=con.getMenu();
+				customer.seterror("0");
+				
 			}
 			else {
-				jsonStr = "{\"info\":\"1\"}";
+				customer=con.getMenu();
+				customer.seterror("1");
 			}
+			con.conClose();
+			Gson gson=new Gson();
+			String json=gson.toJson(customer);
+			System.out.println(json);
+			request.setAttribute("data", json);
+			request.getRequestDispatcher("dishes.jsp").forward(request, response);
     		System.out.println(jsonStr);
     		PrintWriter out = null;
     		try {
