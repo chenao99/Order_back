@@ -2,6 +2,8 @@ package DbConnect;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import Data.order;
 import Data.Table;
@@ -117,6 +119,8 @@ public class order_con extends DBcon {
 	//修订单状态
 	public boolean changeorderstate(String id,String state) throws SQLException{
 		String sql="SELECT table_id	FROM `order` where order_id=?";
+		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式 
+		String overdate=df.format(new Date());     //订单id
 		ps = dbConn.prepareStatement(sql);
 		ps.setString(1,id);
 		rs = ps.executeQuery();
@@ -126,10 +130,12 @@ public class order_con extends DBcon {
 			ps.setString(1,rs.getString("table_id"));
 			ps.executeUpdate();
 		}
-		sql="update `order` set state=? where `order_id`=?";
+		sql="update `order` set state=?,over_time=? where `order_id`=?";
 		ps = dbConn.prepareStatement(sql);
 		ps.setString(1,state);
-		ps.setString(2,id);
+		ps.setString(2,overdate);
+		System.out.println(overdate);
+		ps.setString(3,id);
 		int t=ps.executeUpdate();
         if(t>0)
         {

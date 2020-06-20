@@ -95,7 +95,26 @@
 </style>
 
 <body>
-
+<div  class="nav_bg">
+        <div class="wrap"> 
+            <ul id="nav" class="nav clearfix">
+                <li class="nLi" style="font-size: 30px;">
+                    <h3 class="e"><a  href="main.jsp" style="font-size: 23px;">首页</a></h3>
+                </li>
+                <li class="nLi">
+                  <h3 class="d"><a  href="info.jsp">发布公告</a></h3>
+                </li>
+                <li class="nLi ">
+                  <h3 class="d"><a href="/Order/FindallOrder">全部订单</a></h3>
+                  
+                </li>
+          
+                <li class="nLi ">
+                  <h3 class="d"><a href="/Order/getturnover">营业额统计</a></h3>
+                </li>
+            </ul>
+        </div>
+    </div>
 
 	
 	<table align="center" width="100%">

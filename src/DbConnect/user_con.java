@@ -104,6 +104,34 @@ public class user_con extends DBcon{
 	}
 	
 	
+	public String GetHy(int id) throws Exception
+	{
+		String sql="SELECT * FROM  customer where c_Id=?";
+		ps = dbConn.prepareStatement(sql);
+	    ps.setLong(1, id);
+        rs = ps.executeQuery();
+        if(rs.next()) {
+        	
+            String hy=rs.getString("c_Hy");
+            return hy;
+        }
+		return null;
+	}
+	//³äÖµ
+	public boolean SetHy(int id) throws Exception
+	{
+		String sql="update customer set c_Hy='»áÔ±' where c_Id=?";
+		ps = dbConn.prepareStatement(sql);
+	    ps.setLong(1, id);
+	    int t=ps.executeUpdate();
+        if(t>0)
+        {
+        	return true;
+        }
+		return false;
+	}
+	
+	
 	
 	
 	
